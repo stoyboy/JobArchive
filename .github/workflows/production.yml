@@ -18,7 +18,8 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - id: string
+      - name: Set repository name to lowercase
+        id: string
         uses: ASzc/change-string-case-action@v2
         with:
           string: ${{ github.repository }}
