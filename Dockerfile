@@ -1,13 +1,13 @@
 FROM node:lts as dependencies
 WORKDIR /JobArchive
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm install --frozen-lockfile
 
 FROM node:lts as builder
 WORKDIR /JobArchive
 COPY . .
 COPY --from=dependencies /JobArchive/node_modules ./node_modules
-RUN yarn build
+RUN npm run build
 
 FROM node:lts as runner
 WORKDIR /JobArchive
@@ -20,4 +20,4 @@ COPY --from=builder /JobArchive/node_modules ./node_modules
 COPY --from=builder /JobArchive/package.json ./package.json
 
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
