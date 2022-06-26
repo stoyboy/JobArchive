@@ -3,7 +3,7 @@ import { Button, Empty, Modal, Table } from 'antd';
 import { ExclamationCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { FC, useState } from 'react';
 import axios from 'axios';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { Waveform } from '@uiball/loaders';
 import Link from 'next/link';
 import 'antd/dist/antd.css';
@@ -14,6 +14,7 @@ export const Dashboard: FC = () => {
     isLoading: boolean;
     isError: any;
   }>('/api/get', () => axios.get('http://localhost:3000/api/get'));
+  const isLoading = !error && !data;
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const { confirm } = Modal;
 
@@ -134,7 +135,7 @@ export const Dashboard: FC = () => {
           />
         )}
 
-        {!data && (
+        {isLoading && (
           <div className='w-full h-[80vh] flex justify-center items-center'>
             <Waveform size={50} lineWeight={5} speed={1.4} color='black' />
           </div>
