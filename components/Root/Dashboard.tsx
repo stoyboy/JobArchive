@@ -83,7 +83,7 @@ export const Dashboard: FC = () => {
             }
           );
           if (response) {
-            setSelectedRowKeys([])
+            setSelectedRowKeys([]);
             mutate('/api/get');
             resolve();
           }
