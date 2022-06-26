@@ -76,6 +76,8 @@ export const Dashboard: FC = () => {
             }
           );
           if (response) {
+            setSelectedRowKeys([])
+            mutate('/api/get');
             resolve();
           }
         }).catch(() => console.log('Oops errors!'));
