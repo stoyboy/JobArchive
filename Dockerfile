@@ -7,6 +7,7 @@ FROM node:lts as builder
 WORKDIR /JobArchive
 COPY . .
 COPY --from=dependencies /JobArchive/node_modules ./node_modules
+RUN npm run generate
 RUN npm run build
 
 FROM node:lts as runner
@@ -18,7 +19,6 @@ COPY --from=builder /JobArchive/public ./public
 COPY --from=builder /JobArchive/.next ./.next
 COPY --from=builder /JobArchive/node_modules ./node_modules
 COPY --from=builder /JobArchive/package.json ./package.json
-RUN npm run generate
 
 EXPOSE 3000
 CMD ["npm", "start"]
