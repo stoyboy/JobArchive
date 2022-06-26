@@ -54,10 +54,16 @@ export const Dashboard: FC = () => {
       key: 'location',
     },
     {
-      title: 'Kennenlerndatum',
+      title: 'Datum der Erstbegegnung',
       dataIndex: 'date',
       key: 'date',
-      render: (date: string) => new Date(date).toLocaleDateString(),
+      render: (date: string) =>
+        new Date(date).toLocaleDateString('de-DE', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
     },
   ];
 
