@@ -115,6 +115,7 @@ export const Dashboard: FC = () => {
         {data && (
           <Table
             rowSelection={rowSelection}
+            rowClassName="hover:cursor-pointer"
             dataSource={data.data}
             columns={columns}
             pagination={{
