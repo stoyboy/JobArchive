@@ -10,9 +10,11 @@ export default async function handler(
     data: {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      location: req.body.location,
       company: req.body.company,
-      field: req.body.field
+      field: req.body.field,
+      location: req.body.location,
+      date: req.body.date,
+      info: req.body.info
     }
   })
   res.status(200).json(response)
