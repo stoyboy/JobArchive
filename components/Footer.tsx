@@ -2,12 +2,10 @@ import { FC } from "react"
 
 export const Footer: FC = () => {
     return (
-        <div className='mt-auto'>
-            <footer className='footer footer-center p-4 bg-base-300 text-base-content'>
-                <div>
-                    <p>Copyright © 2022 - Jovan Stojimirovic</p>
-                </div>
-            </footer>
-        </div>
+        <footer className='w-full mt-auto bg-slate-100'>
+            <div className='flex justify-center items-center p-4'>
+                <span>Copyright © 2022 - Jovan Stojimirovic</span>
+            </div>
+        </footer>
     )
 }
