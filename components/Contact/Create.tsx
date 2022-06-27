@@ -19,11 +19,9 @@ export const Create: FC = () => {
 
   const onFinish = async (values: Contact) => {
     setLoading(true);
-    console.log(values);
     const response = await axios.post('http://localhost:3000/api/create', {
       ...values,
     });
-    console.log(response)
     if (response.status == 200) {
       Router.push("/")
     }
