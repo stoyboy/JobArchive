@@ -3,7 +3,6 @@ import Head from "next/head";
 import { Body } from "../../components/Body";
 import { Create } from "../../components/Contact/Create";
 import { Footer } from "../../components/Footer";
-import { Dashboard } from "../../components/Root/Dashboard";
 
 const CreateContact: NextPage = () => {
   return (
