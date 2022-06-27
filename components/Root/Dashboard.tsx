@@ -65,6 +65,16 @@ export const Dashboard: FC = () => {
           day: 'numeric',
         }),
     },
+    {
+      render: (data: Contact) => {
+        console.log(data)
+        return (
+          <Link href={`/contact/${data.id}`} >
+            <Button className='cursor-pointer'>Bearbeiten</Button>
+          </Link>
+        )
+      }
+    },
   ];
 
   const showDeleteConfirm = () => {
@@ -115,20 +125,12 @@ export const Dashboard: FC = () => {
         {data && (
           <Table
             rowSelection={rowSelection}
-            rowClassName="hover:cursor-pointer"
             dataSource={data.data}
             columns={columns}
             pagination={{
               position: ['bottomRight'],
               pageSize: 10,
               showSizeChanger: false,
-            }}
-            onRow={(record, rowIndex) => {
-              return {
-                onClick: (event) => {
-                  console.log(record, rowIndex);
-                },
-              };
             }}
             rowKey='id'
             locale={{
