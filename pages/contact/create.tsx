@@ -1,8 +1,27 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { Body } from "../../components/Body";
 import { Create } from "../../components/Contact/Create";
 import { Footer } from "../../components/Footer";
+import { auth } from "../../firebase/firebase";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+      props: {},
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+};
 
 const CreateContact: NextPage = () => {
   return (
