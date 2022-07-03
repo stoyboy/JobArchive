@@ -30,6 +30,7 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ steps.string.outputs.lowercase }}:latest
+        env:
           FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
           FIREBASE_AUTHDOMAIN: ${{ secrets.FIREBASE_AUTHDOMAIN }}
           FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
