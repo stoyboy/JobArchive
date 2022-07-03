@@ -7,6 +7,9 @@ import useSWR, { mutate } from 'swr';
 import { Waveform } from '@uiball/loaders';
 import Link from 'next/link';
 import 'antd/dist/antd.css';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase/firebase';
+import Router from 'next/router';
 
 export const Dashboard: FC = () => {
   const { data, error } = useSWR<{
@@ -67,13 +70,13 @@ export const Dashboard: FC = () => {
     },
     {
       render: (data: Contact) => {
-        console.log(data)
+        console.log(data);
         return (
-          <Link href={`/contact/${data.id}`} >
+          <Link href={`/contact/${data.id}`}>
             <Button className='cursor-pointer'>Bearbeiten</Button>
           </Link>
-        )
-      }
+        );
+      },
     },
   ];
 
@@ -108,6 +111,17 @@ export const Dashboard: FC = () => {
   return (
     <div>
       <div className='flex flex-col sm:flex-row justify-end items-end sm:items-center m-6 gap-4'>
+        <Button
+          onClick={async () => {
+            const response = await axios.post(
+              'http://localhost:3000/api/logout'
+            );
+            if (response.status == 200) Router.push('/');
+          }}
+        >
+          Log out
+        </Button>
+        <div className='grow' />
         <Button
           type='primary'
           danger
