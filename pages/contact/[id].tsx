@@ -9,26 +9,39 @@ import Head from 'next/head';
 import { Body } from '../../components/Body';
 import { View } from '../../components/Contact/View';
 import { Footer } from '../../components/Footer';
+import { auth } from '../../firebase/firebase';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.query;
-  const response = await axios.get('http://localhost:3000/api/getOne', {
-    params: {
-      id
-    }
-  });
+  const user = auth.currentUser;
 
-  if (!response.data) {
+  if (!user) {
     return {
-      notFound: true,
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+      props: {},
+    };
+  } else {
+    const { id } = context.query;
+    const response = await axios.get('http://localhost:3000/api/getOne', {
+      params: {
+        id,
+      },
+    });
+
+    if (!response.data) {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: {
+        data: response.data,
+      },
     };
   }
-
-  return {
-    props: {
-      data: response.data,
-    },
-  };
 };
 
 const ViewContact: NextPage = ({
